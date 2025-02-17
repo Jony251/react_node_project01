@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Contacts.module.css';
 import CustomButton from '../common/CustomButton/CustomButton';
+import CustomInput from '../common/CustomInput/CustomInput';
 
 /**
  * A functional component that renders a form for sending a message to the
@@ -51,29 +52,29 @@ function ContactUs() {
                     <label htmlFor="name" className={styles.label}>
                         Name:
                     </label>
-                    <input
+                    <CustomInput
                         type="text"
                         id="name"
                         name="name"
-                        className={styles.input}
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Enter your name"
                         required
+                        className={styles.input}
                     />
 
                     <label htmlFor="email" className={styles.label}>
                         Email:
                     </label>
-                    <input
+                    <CustomInput
                         type="email"
                         id="email"
                         name="email"
-                        className={styles.input}
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="Enter your email"
                         required
+                        className={styles.input}
                     />
 
                     <label htmlFor="message" className={styles.label}>

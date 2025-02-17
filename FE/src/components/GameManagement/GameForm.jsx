@@ -3,6 +3,16 @@ import CustomButton from '../common/CustomButton/CustomButton';
 import CustomInput from '../common/CustomInput/CustomInput';
 import './GameForm.css';
 
+/**
+ * GameForm component - a form for creating or editing a game
+ * @param {string} mode - either 'upload' or 'edit'
+ * @param {object} gameData - the initial game data
+ * @param {boolean} loading - whether the form is loading or not
+ * @param {function} onSubmit - the submit handler
+ * @param {function} onChange - the change handler for the form fields
+ * @param {function} onImageChange - the change handler for the image field
+ * @param {function} onCancel - the cancel handler
+ */
 const GameForm = ({ mode, gameData, loading, onSubmit, onChange, onImageChange, onCancel }) => {
     const fileInputRef = useRef(null);
     const [selectedFileName, setSelectedFileName] = useState('');

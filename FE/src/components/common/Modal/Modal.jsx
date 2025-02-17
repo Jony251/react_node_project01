@@ -1,6 +1,14 @@
 import React, { useEffect } from 'react';
 import './Modal.css';
 
+/**
+ * Modal component that will be used to display popups
+ *
+ * @param {boolean} isOpen - Whether the modal should be visible or not
+ * @param {function} onClose - Function to be called when the modal is closed
+ * @param {string} title - Optional title for the modal
+ * @param {ReactNode} children - The content of the modal
+ */
 const Modal = ({ isOpen, onClose, title, children }) => {
     useEffect(() => {
         const handleEscape = (e) => {

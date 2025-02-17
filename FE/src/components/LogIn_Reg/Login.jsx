@@ -7,7 +7,22 @@ import CustomButton from '../common/CustomButton/CustomButton';
 import CustomInput from '../common/CustomInput/CustomInput';
 import { useAuth } from '../../context/AuthContext';
 
+/**
+ * The Login component handles user login and signup.
+ * It renders a form with inputs for username, email, password, and confirm password.
+ * The form is validated using the validateForm() function.
+ * If the form is valid, the handleSubmit() function is called.
+ * The handleSubmit() function sends a POST request to the server with the form data.
+ * If the response is ok, the user is logged in and redirected to the homepage.
+ * If the response is not ok, an error message is displayed.
+ * The component also renders a button to toggle between login and signup modes.
+ * @returns The Login component
+ */
 function Login() {
+    /**
+     * A state variable to track whether the user is in login mode or signup mode.
+     * @type {boolean}
+     */
     const navigate = useNavigate();
     const { login } = useAuth();
     const [isLoginMode, setIsLoginMode] = useState(true);
@@ -20,6 +35,12 @@ function Login() {
     const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
+    /**
+     * A function to validate the form.
+     * It checks for the presence and validity of the username, email, password, and confirm password fields.
+     * If the form is valid, it returns true. Otherwise, it returns false and sets the errors state with the appropriate error messages.
+     * @returns {boolean} Whether the form is valid or not.
+     */
     const validateForm = () => {
         const newErrors = {};
 
@@ -59,6 +80,11 @@ function Login() {
         return Object.keys(newErrors).length === 0;
     };
 
+    /**
+     * Handles the change event for the input fields in the login form.
+     * Updates the formData state with the new value.
+     * @param {Object} e the event object
+     */
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -74,6 +100,13 @@ function Login() {
         }
     };
 
+    /**
+     * Handles the form submission event.
+     * Prevents the default form submission behavior.
+     * If the form is valid, it sends a POST request to the server to log in or sign up the user.
+     * If the form is invalid, it displays the appropriate error messages.
+     * @param {Object} e the event object
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -154,10 +187,12 @@ function Login() {
         }
     };
 
+    // Closes the error popup
     const handleCloseError = () => {
         setErrors(prev => ({ ...prev, submit: '' }));
     };
 
+    // Toggles the mode between login and registration
     const toggleMode = () => {
         setIsLoginMode(!isLoginMode);
         setFormData({

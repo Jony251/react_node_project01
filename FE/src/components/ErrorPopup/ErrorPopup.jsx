@@ -1,6 +1,12 @@
 import React from 'react';
 import styles from './ErrorPopup.module.css';
 
+/**
+ * A modal popup that displays an error message
+ * 
+ * @param {string} message - The error message to display
+ * @param {function} onClose - A function to call when the popup is closed
+ */
 function ErrorPopup({ message, onClose }) {
     if (!message) return null;
 

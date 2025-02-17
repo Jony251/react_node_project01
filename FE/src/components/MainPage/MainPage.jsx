@@ -16,6 +16,11 @@ function MainPage() {
         fetchGames();
     }, []);
     
+    /**
+     * Fetches all games from the server and updates the component state
+     * Sets loading true while fetching and false when done
+     * If there's an error, sets the error state
+     */
     const fetchGames = async () => {
         try {
             setLoading(true);

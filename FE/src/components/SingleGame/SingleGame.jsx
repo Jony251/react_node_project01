@@ -4,6 +4,14 @@ import styles from './SingleGame.module.css';
 import CustomButton from '../common/CustomButton/CustomButton';
 import axios from 'axios';
 
+/**
+ * SingleGame component - displays a single game
+ * 
+ * This component fetches a game based on the id in the URL
+ * and renders its details
+ * 
+ * @returns {JSX.Element}
+ */
 function SingleGame() {
     const location = useLocation();
     const { id } = useParams();
@@ -20,6 +28,10 @@ function SingleGame() {
         }
     }, [id, location]);
     
+    /**
+     * Fetches a game based on the id in the URL
+     * and sets the game state
+     */
     const fetchGameData = async () => {
         try {
             setLoading(true);
