@@ -8,6 +8,9 @@ A full-stack web application built with React for the frontend and Node.js for t
 - Responsive design with modern UI
 - RESTful API integration
 - Secure data management
+- Centralized color system
+- Dynamic content management through database
+- Modular component architecture
 
 ## Technologies
 
@@ -16,11 +19,12 @@ A full-stack web application built with React for the frontend and Node.js for t
 - React Router for navigation
 - CSS Modules for styling
 - Context API for state management
+- Centralized color system using CSS variables
 
 ### Backend
 - Node.js
 - Express.js
-- MongoDB for database
+- MySQL for database
 - JWT for authentication
 
 ## Installation
@@ -89,19 +93,46 @@ react_node_project/
 │   │   ├── components/    # React components
 │   │   ├── context/      # Context providers
 │   │   ├── pages/        # Page components
-│   │   └── services/     # API services
+│   │   ├── services/     # API services
+│   │   └── styles/       # Global styles and color system
 │   └── package.json      # Frontend dependencies
 │
 ├── BE/                    # Backend directory
-│   ├── src/              # Source files
-│   │   ├── controllers/  # Route controllers
-│   │   ├── models/       # Database models
-│   │   ├── routes/       # API routes
-│   │   └── middleware/   # Custom middleware
+│   ├── database/         # Database configuration
+│   ├── routes/           # API routes
 │   └── package.json      # Backend dependencies
+│
+├── DB/                   # Database migrations and schemas
 │
 └── README.md             # Project documentation
 ```
+
+## Color System
+
+The project uses a centralized color system located in `FE/src/styles/colors.css`. This provides:
+
+- Consistent theming across all components
+- Easy color scheme modifications
+- Support for light/dark themes
+- Semantic color naming
+
+Example usage:
+```css
+.myComponent {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+}
+```
+
+## Content Management
+
+The application uses a database-driven content management system for:
+- Home page content
+- Footer content
+- Dynamic text elements
+
+This allows for easy content updates without code changes.
 
 ## Contributing
 
@@ -117,7 +148,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Authors
 
-- Your Name - Initial work
+- Evgeny Nemchenko
+- Leonid Shmiakin
 
 ## Acknowledgments
 
