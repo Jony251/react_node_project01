@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--overlay-dark);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,10 +13,10 @@
 }
 
 .popup {
-    background: white;
+    background: var(--bg-primary);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 6px var(--overlay-dark), 0 1px 3px var(--overlay-dark);
     max-width: 400px;
     width: 90%;
     position: relative;
@@ -28,17 +28,18 @@
     align-items: center;
     margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .errorIcon {
     margin-right: 10px;
     font-size: 1.2em;
+    color: var(--danger);
 }
 
 .header h3 {
     margin: 0;
-    color: #dc3545;
+    color: var(--danger);
     flex-grow: 1;
 }
 
@@ -46,18 +47,18 @@
     background: none;
     border: none;
     font-size: 24px;
-    color: #666;
+    color: var(--text-secondary);
     cursor: pointer;
     padding: 0 5px;
-    line-height: 1;
+    transition: color 0.2s;
 }
 
 .closeButton:hover {
-    color: #dc3545;
+    color: var(--text-dark);
 }
 
 .content {
-    color: #444;
+    color: var(--text-secondary);
     font-size: 0.95em;
     line-height: 1.5;
 }

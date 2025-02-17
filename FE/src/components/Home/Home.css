@@ -6,7 +6,7 @@
 
 .home-container h1 {
     text-align: center;
-    color: #333;
+    color: var(--text-dark);
     margin-bottom: 2rem;
 }
 
@@ -18,14 +18,14 @@
 }
 
 .features, .getting-started {
-    background: white;
+    background: var(--bg-primary);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--overlay-dark);
 }
 
 .features h2, .getting-started h2 {
-    color: #333;
+    color: var(--text-dark);
     margin-bottom: 1rem;
     font-size: 1.5rem;
 }
@@ -43,7 +43,7 @@
 
 .features li:before {
     content: "•";
-    color: #007bff;
+    color: var(--primary-color);
     position: absolute;
     left: 0;
     font-weight: bold;
@@ -51,7 +51,7 @@
 
 .getting-started p {
     line-height: 1.6;
-    color: #666;
+    color: var(--text-medium);
 }
 
 @media (max-width: 768px) {
