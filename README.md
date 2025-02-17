@@ -46,11 +46,6 @@ cd ../BE
 npm install
 ```
 
-3. Set up environment variables:
-   - Create `.env` file in the backend directory
-   - Create `.env` file in the frontend directory
-   - Add necessary environment variables (see `.env.example` for reference)
-
 ## Running the Application
 
 ### Development Mode
