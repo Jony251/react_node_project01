@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from "./Footer.module.css"
+import { getPageContent } from '../../services/pageContentService'
 
 /**
  * Footer component for the application
@@ -7,9 +8,19 @@ import styles from "./Footer.module.css"
  * @constructor
  */
 function Footer() {
+  const [footerContent, setFooterContent] = useState('');
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      const content = await getPageContent('footer');
+      setFooterContent(content);
+    };
+    fetchContent();
+  }, []);
+
   return (
     <footer className={styles.footer}>
-      <p className={styles.copyright}>Copyright &copy; 2025 Evgeny Nemchenko & Leonid Shmiakin</p>
+      <p className={styles.copyright}>{footerContent}</p>
     </footer>
   )
 }

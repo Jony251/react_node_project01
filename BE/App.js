@@ -5,6 +5,7 @@ const path = require('path');
 const db = require('./database/dbSingleton');
 const gamesRoutes = require('./routes/games');
 const userRoutes = require('./routes/user');
+const pageContentRouter = require('./routes/pageContent');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(cors({
 // Routes
 app.use('/api/games', gamesRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/page-content', pageContentRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
