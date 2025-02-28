@@ -119,47 +119,17 @@ function Login() {
 
             if (isLoginMode) {
                 // Login logic
-                const response = await fetch('/api/user/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: formData.email,
-                        password: formData.password
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || 'Login failed');
-                }
-
-                console.log('Login response:', data);
-                
-                // Make sure we have the user role in the response
-                if (data.user && typeof data.user.role !== 'undefined') {
-                    console.log('User role from server:', data.user.role);
+                const loginResult = await login(formData.email, formData.password);
+                if (loginResult.success) {
+                    navigate('/');
                 } else {
-                    console.warn('No role information in user data');
+                    setErrors({
+                        submit: loginResult.message
+                    });
                 }
-
-                // Call the login function from auth context
-                login(data.user, data.token);
-                navigate('/');
             } else {
                 // Signup logic
-                const checkResponse = await axios.post('/api/user/check', {
-                    email: formData.email,
-                    username: formData.username
-                });
-
-                if (checkResponse.data.exists.username || checkResponse.data.exists.email) {
-                    throw new Error('User with this username or email already exists');
-                }
-
-                const response = await axios.post('/api/user/', {
+                const response = await axios.post('/api/user/register', {
                     username: formData.username,
                     email: formData.email,
                     password: formData.password
@@ -179,6 +149,7 @@ function Login() {
                 }
             }
         } catch (error) {
+            console.error('Auth error:', error);
             setErrors({
                 submit: error.response?.data?.error || error.message || `An error occurred during ${isLoginMode ? 'login' : 'registration'}`
             });

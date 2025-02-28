@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext(null);
 
@@ -17,57 +18,79 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         // Check if user is logged in on page load
         const token = localStorage.getItem('token');
-        const storedUser = localStorage.getItem('user');
-        
-        if (token && storedUser) {
+        if (token) {
+            // Set up axios interceptor for adding token to requests
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            
             try {
-                const userData = JSON.parse(storedUser);
+                const userData = JSON.parse(localStorage.getItem('user'));
                 setIsAuthenticated(true);
                 setUser(userData);
-                // Check if role is exactly 1 (admin)
                 setIsAdmin(userData.role === 1);
-                console.log('User role:', userData.role, 'isAdmin:', userData.role === 1);
             } catch (error) {
                 console.error('Error parsing user data:', error);
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                setIsAuthenticated(false);
-                setUser(null);
-                setIsAdmin(false);
+                handleLogout();
             }
         }
     }, []);
 
     /**
      * Logs in the user
-     * @param {Object} userData The user data returned by the server
-     * @param {string} token The authentication token
+     * @param {string} email The email of the user
+     * @param {string} password The password of the user
+     * @returns {Object} An object with a success property and a message property if the login fails
      */
-    const login = (userData, token) => {
-        console.log('Login data:', userData);
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(userData));
-        setIsAuthenticated(true);
-        setUser(userData);
-        // Check if role is exactly 1 (admin)
-        setIsAdmin(userData.role === 1);
-        console.log('Setting admin status:', userData.role === 1);
+    const handleLogin = async (email, password) => {
+        try {
+            const response = await axios.post('/api/user/login', {
+                email,
+                password
+            });
+
+            const { token, user } = response.data;
+            
+            // Store token and user data
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
+            
+            // Set up axios interceptor
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+            setIsAuthenticated(true);
+            setUser(user);
+            setIsAdmin(user.role === 1);
+
+            return { success: true };
+        } catch (error) {
+            console.error('Login error:', error);
+            return {
+                success: false,
+                message: error.response?.data?.error || 'Login failed'
+            };
+        }
     };
 
     /**
      * Logs out the user
      * Removes the token and user data from local storage and sets the appropriate state
      */
-    const logout = () => {
+    const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        delete axios.defaults.headers.common['Authorization'];
         setIsAuthenticated(false);
         setUser(null);
         setIsAdmin(false);
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, user, isAdmin, login, logout }}>
+        <AuthContext.Provider value={{
+            isAuthenticated,
+            user,
+            isAdmin,
+            login: handleLogin,
+            logout: handleLogout
+        }}>
             {children}
         </AuthContext.Provider>
     );
@@ -90,3 +113,5 @@ export const useAuth = () => {
     }
     return context;
 };
+
+export default AuthContext;

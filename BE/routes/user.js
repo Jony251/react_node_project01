@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const dbSingleton = require('../database/dbSingleton');
+const { JWT_SECRET } = require('../middleware/auth');
+const jwt = require('jsonwebtoken');
 
 // Get database connection
 const db = dbSingleton.getConnection();
 
-// Signup endpoint
-router.post('/', async (req, res) => {
+// Registration endpoint
+router.post('/register', async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
@@ -68,7 +70,7 @@ router.post('/', async (req, res) => {
                 const hashedPassword = await bcrypt.hash(password, saltRounds);
 
                 // Insert new user
-                const insertQuery = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+                const insertQuery = 'INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 0)';
                 db.query(insertQuery, [username, email, hashedPassword], (error, results) => {
                     if (error) {
                         console.error('Database error:', error);
@@ -105,51 +107,58 @@ router.post('/login', async (req, res) => {
         // Input validation
         if (!email || !password) {
             return res.status(400).json({
-                error: 'All fields are required'
+                error: 'Email and password are required'
             });
         }
 
+        // Find user by email
         const query = 'SELECT * FROM users WHERE email = ?';
-        db.query(query, [email], async (err, results) => {
-            if (err) {
-                console.error('Database error:', err);
-                res.status(500).json({ error: err.message });
-                return;
+        db.query(query, [email], async (error, results) => {
+            if (error) {
+                console.error('Database error:', error);
+                return res.status(500).json({
+                    error: 'An error occurred while logging in'
+                });
             }
 
             if (results.length === 0) {
-                res.status(401).json({ message: 'User not found' });
-                return;
+                return res.status(401).json({
+                    error: 'Invalid credentials'
+                });
             }
 
             const user = results[0];
-            const isValid = await bcrypt.compare(password, user.password);
+            const validPassword = await bcrypt.compare(password, user.password);
 
-            if (!isValid) {
-                res.status(401).json({ message: 'Invalid password' });
-                return;
+            if (!validPassword) {
+                return res.status(401).json({
+                    error: 'Invalid credentials'
+                });
             }
 
-            // Create user object without sensitive information
-            const userResponse = {
-                id: user.id,
-                username: user.username,
-                email: user.email,
-                role: user.role // Include the role in the response
-            };
+            // Create JWT token
+            const token = jwt.sign(
+                { 
+                    id: user.id, 
+                    email: user.email,
+                    role: user.role 
+                },
+                JWT_SECRET,
+                { expiresIn: '24h' }
+            );
 
-            console.log('User data being sent:', userResponse); // Debug log
+            // Remove password from user object
+            const { password: _, ...userWithoutPassword } = user;
 
             res.json({
-                message: 'Login successful',
-                user: userResponse,
-                token: 'your-token-here' // Replace with actual token generation
+                user: userWithoutPassword,
+                token
             });
         });
     } catch (error) {
-        console.error('Server error:', error);
+        console.error('Login error:', error);
         res.status(500).json({
-            error: 'An error occurred while processing your request'
+            error: 'An error occurred while logging in'
         });
     }
 });

@@ -3,6 +3,7 @@ const router = express.Router();
 const dbSingleton = require('../database/dbSingleton');
 const db = dbSingleton.getConnection();
 const multer = require('multer');
+const { verifyToken, checkAdmin } = require('../middleware/auth');
 
 // Configure multer for image upload with validation
 const storage = multer.memoryStorage();
@@ -93,7 +94,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Create a new game with validation
-router.post('/', upload.single('image'), handleMulterError, async (req, res) => {
+router.post('/', verifyToken, checkAdmin, upload.single('image'), handleMulterError, async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({ message: 'Image file is required' });
@@ -133,7 +134,7 @@ router.post('/', upload.single('image'), handleMulterError, async (req, res) => 
 });
 
 // Update a game with validation
-router.put('/:id', upload.single('image'), handleMulterError, (req, res) => {
+router.put('/:id', verifyToken, checkAdmin, upload.single('image'), handleMulterError, (req, res) => {
     const { id } = req.params;
     const { title, content, ageRating } = req.body;
     
@@ -166,7 +167,7 @@ router.put('/:id', upload.single('image'), handleMulterError, (req, res) => {
 });
 
 // Delete a game
-router.delete('/:id', (req, res) => {
+router.delete('/:id', verifyToken, checkAdmin, (req, res) => {
     const { id } = req.params;
     const query = 'DELETE FROM games WHERE id = ?';
     
