@@ -1,0 +1,21 @@
+.age-balloon {
+  background-color: #ff6b6b;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.age-balloon:hover {
+  transform: scale(1.1);
+}
+
+.age-text {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
