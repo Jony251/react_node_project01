@@ -4,6 +4,7 @@ import './GameManagement.css';
 import CustomButton from '../common/CustomButton/CustomButton';
 import Modal from '../common/Modal/Modal';
 import GameForm from './GameForm';
+import Age from '../Age/Age';
 
 /**
  * GameManagement component - handles game management features
@@ -17,7 +18,7 @@ import GameForm from './GameForm';
  * 
  * State:
  * - existingGames: an array of game objects
- * - gameData: an object with the game data (id, title, content, image)
+ * - gameData: an object with the game data (id, title, content, image, ageRating)
  * - loading: a boolean indicating if the component is loading
  * - showPopup: a boolean indicating if a popup should be shown
  * - popupMessage: the message to display in the popup
@@ -43,6 +44,7 @@ const GameManagement = () => {
         title: '',
         content: '',
         image: null,
+        ageRating: null
     });
     const [existingGames, setExistingGames] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -120,7 +122,8 @@ const GameManagement = () => {
                 id: game.id,
                 title: game.title,
                 content: game.content,
-                image: null
+                image: null,
+                ageRating: game.ageRating
             });
             setMode('edit');
             setIsModalOpen(true);
@@ -140,7 +143,8 @@ const GameManagement = () => {
             id: null,
             title: '',
             content: '',
-            image: null
+            image: null,
+            ageRating: null
         });
         setIsModalOpen(true);
     };
@@ -155,7 +159,8 @@ const GameManagement = () => {
             id: null,
             title: '',
             content: '',
-            image: null
+            image: null,
+            ageRating: null
         });
     };
 
@@ -174,6 +179,7 @@ const GameManagement = () => {
             if (gameData.image) {
                 formData.append('image', gameData.image);
             }
+            formData.append('ageRating', gameData.ageRating);
 
             if (mode === 'upload') {
                 await axios.post('/api/games', formData, {
@@ -243,11 +249,15 @@ const GameManagement = () => {
             <div className="games-grid">
                 {existingGames.map(game => (
                     <div key={game.id} className="game-card">
+                        <div className="ageWrapper">
+                            <Age ageRating={game.ageRating} />
+                        </div>
                         <img 
                             src={`data:image/jpeg;base64,${game.image}`} 
                             alt={game.title} 
                             className="game-thumbnail" 
                         />
+                        
                         <h4>{game.title}</h4>
                         <div className="game-card-actions">
                             <CustomButton
