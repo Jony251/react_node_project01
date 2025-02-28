@@ -43,6 +43,20 @@ const GameForm = ({ mode, gameData, loading, onSubmit, onChange, onImageChange, 
                 disabled={loading}
             />
 
+            <CustomInput
+                type="number"
+                id="ageRating"
+                name="ageRating"
+                value={gameData.ageRating || ''}
+                onChange={onChange}
+                label="Age Rating"
+                placeholder="Enter age rating (e.g., 12)"
+                required
+                disabled={loading}
+                min="0"
+                max="18"
+            />
+
             <div className="form-group">
                 <label htmlFor="content">Description</label>
                 <textarea

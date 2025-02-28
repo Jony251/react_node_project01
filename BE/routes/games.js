@@ -99,7 +99,7 @@ router.post('/', upload.single('image'), handleMulterError, async (req, res) => 
             return res.status(400).json({ message: 'Image file is required' });
         }
 
-        const { title, content } = req.body;
+        const { title, content, ageRating } = req.body;
 
         if (!title || !content) {
             return res.status(400).json({ message: 'Title and content are required' });
