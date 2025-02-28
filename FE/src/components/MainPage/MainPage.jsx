@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './MainPage.module.css'; 
 import axios from 'axios';
+import Age from '../Age/Age';
 
 /**
  * MainPage component - displays a list of games with links.
@@ -73,6 +74,9 @@ function MainPage() {
                     <div className={styles.gameContainer}>
                         {games.map((game) => (
                             <div key={game.id} className={styles.gameCard}>
+                                <div className={styles.ageWrapper}>
+                                    <Age ageRating={game.ageRating} />
+                                </div>
                                 {game.imageUrl && (
                                     <img 
                                         src={game.imageUrl} 

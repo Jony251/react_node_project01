@@ -106,9 +106,9 @@ router.post('/', upload.single('image'), handleMulterError, async (req, res) => 
         }
 
         // Insert into games table
-        const query = 'INSERT INTO games (title, image, content) VALUES (?, ?, ?)';
+        const query = 'INSERT INTO games (title, image, content, ageRating) VALUES (?, ?, ?, ?)';
         
-        db.query(query, [title, req.file.buffer, content], (err, results) => {
+        db.query(query, [title, req.file.buffer, content, ageRating], (err, results) => {
             if (err) {
                 console.error('Database error:', err);
                 return res.status(500).json({ 
@@ -135,19 +135,19 @@ router.post('/', upload.single('image'), handleMulterError, async (req, res) => 
 // Update a game with validation
 router.put('/:id', upload.single('image'), handleMulterError, (req, res) => {
     const { id } = req.params;
-    const { title, content } = req.body;
+    const { title, content, ageRating } = req.body;
     
     let query;
     let params;
 
     if (req.file) {
         // If new image is provided, update all fields
-        query = 'UPDATE games SET title = ?, image = ?, content = ? WHERE id = ?';
-        params = [title, req.file.buffer, content, id];
+        query = 'UPDATE games SET title = ?, image = ?, content = ?, ageRating = ? WHERE id = ?';
+        params = [title, req.file.buffer, content, ageRating, id];
     } else {
         // If no new image, only update title and content
-        query = 'UPDATE games SET title = ?, content = ? WHERE id = ?';
-        params = [title, content, id];
+        query = 'UPDATE games SET title = ?, content = ?, ageRating = ? WHERE id = ?';
+        params = [title, content, ageRating, id];
     }
     
     db.query(query, params, (err, results) => {
