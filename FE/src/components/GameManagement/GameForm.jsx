@@ -76,7 +76,7 @@ const GameForm = ({ mode, gameData, loading, onSubmit, onChange, onImageChange, 
                     {mode === 'upload' && <span className="required-mark">*</span>}
                 </label>
                 <div className="file-input-wrapper">
-                    <input
+                    <CustomInput
                         type="file"
                         ref={fileInputRef}
                         id="image"
@@ -87,14 +87,7 @@ const GameForm = ({ mode, gameData, loading, onSubmit, onChange, onImageChange, 
                         required={mode === 'upload'}
                         style={{ display: 'none' }}
                     />
-                    <CustomButton
-                        type="button"
-                        onClick={handleFileButtonClick}
-                        disabled={loading}
-                        className="file-select-button"
-                    >
-                        Choose Image
-                    </CustomButton>
+                   
                     {selectedFileName && (
                         <span className="selected-file-name">
                             {selectedFileName}
