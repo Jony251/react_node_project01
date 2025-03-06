@@ -89,7 +89,7 @@ function Login() {
         const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: value.trim()
         }));
         
         if (errors[name]) {

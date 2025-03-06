@@ -17,6 +17,7 @@ import Age from '../Age/Age';
  * to create a new game
  * 
  * State:
+ * - mode (upload or edit): the mode of the form (upload or edit)
  * - existingGames: an array of game objects
  * - gameData: an object with the game data (id, title, content, image, ageRating)
  * - loading: a boolean indicating if the component is loading
@@ -59,7 +60,7 @@ const GameManagement = () => {
 
     /**
      * Fetches all existing games from the server and stores them in the
-     * component state.
+     * component state
      */
     const fetchExistingGames = async () => {
         try {
@@ -85,21 +86,21 @@ const GameManagement = () => {
     };
 
     /**
-     * Handles the change event for the input fields in the game form.
-     * Updates the game data state with the new value.
+     * Handles the change event for the input fields in the game form
+     * Updates the game data state with the new value
      * @param {Object} e the event object
      */
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setGameData(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: value.trim()
         }));
     };
 
     /**
-     * Handles the change event for the image input field in the game form.
-     * Updates the game data state with the new image file.
+     * Handles the change event for the image input field in the game form
+     * Updates the game data state with the new image file
      * @param {Object} e the event object
      */
     const handleImageChange = (e) => {
