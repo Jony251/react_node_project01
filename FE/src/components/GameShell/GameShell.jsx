@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { GAMES, CATEGORIES } from '../../data/gamesRegistry';
+import { useAuth } from '../../context/AuthContext';
 
 /* ── Lazy game map ─────────────────────────────────────── */
 import CountStars       from '../games/math/CountStars';
@@ -56,12 +57,27 @@ const GAME_COMPONENTS = {
 
 function GameShell() {
   const { id } = useParams();
+  const { saveScore } = useAuth();
   const game = GAMES.find(g => g.id === id);
   const [key, setKey] = useState(0);
   const [score, setScore] = useState(0);
 
   const handleScore = useCallback(pts => setScore(s => s + pts), []);
-  const restart = () => { setKey(k => k + 1); setScore(0); };
+
+  useEffect(() => {
+    return () => {
+      if (score > 0 && game) {
+        saveScore(game.id, score, game.difficulty || 'easy');
+      }
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [score]);
+
+  const restart = () => {
+    if (score > 0 && game) saveScore(game.id, score, game.difficulty || 'easy');
+    setKey(k => k + 1);
+    setScore(0);
+  };
 
   if (!game) {
     return (

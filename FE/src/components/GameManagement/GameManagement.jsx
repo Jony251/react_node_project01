@@ -56,6 +56,7 @@ const GameManagement = () => {
 
     useEffect(() => {
         fetchExistingGames();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     /**

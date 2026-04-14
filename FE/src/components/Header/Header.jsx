@@ -4,12 +4,12 @@ import styles from './Header.module.css';
 import { useAuth } from '../../context/AuthContext';
 
 function Header() {
-  const { logout, isAdmin } = useAuth();
+  const { logout, isAdmin, user, isPremium } = useAuth();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     navigate('/login');
   };
 
@@ -66,6 +66,16 @@ function Header() {
               ⚙️ Manage
             </NavLink>
           )}
+
+          <NavLink
+            to="/profile"
+            className={({ isActive }) => `${styles.profileBtn} ${isActive ? styles.active : ''}`}
+            onClick={closeMenu}
+            title="My Profile"
+          >
+            <span className={styles.avatarMini}>{user?.avatar_emoji || '🐱'}</span>
+            {isPremium && <span className={styles.crownMini}>👑</span>}
+          </NavLink>
 
           <button className={styles.logoutBtn} onClick={handleLogout}>
             👋 Logout

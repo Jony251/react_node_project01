@@ -25,6 +25,15 @@ export const CATEGORIES = {
   },
 };
 
+/* difficulty: 'easy' | 'medium' | 'hard'
+   isPremium: true = only available on premium plan           */
+
+export const DIFFICULTIES = {
+  easy:   { label: 'Easy',   emoji: '🟢', color: '#2ecc71' },
+  medium: { label: 'Medium', emoji: '🟡', color: '#f39c12' },
+  hard:   { label: 'Hard',   emoji: '🔴', color: '#e74c3c' },
+};
+
 export const GAMES = [
   /* ── MATH ──────────────────────────────────────────────── */
   {
@@ -35,6 +44,8 @@ export const GAMES = [
     description: 'Count falling stars and enter the right number!',
     ageMin: 4,
     component: 'CountStars',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'math-addition',
@@ -44,6 +55,8 @@ export const GAMES = [
     description: 'Add two numbers and find the answer before time runs out!',
     ageMin: 5,
     component: 'AdditionQuest',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'math-subtraction',
@@ -53,6 +66,8 @@ export const GAMES = [
     description: 'Be a subtraction hero – save the right answer!',
     ageMin: 6,
     component: 'SubtractionHero',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'math-multiply',
@@ -62,6 +77,8 @@ export const GAMES = [
     description: 'Blast off by solving multiplication problems!',
     ageMin: 7,
     component: 'MultiplyRocket',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'math-balloons',
@@ -71,6 +88,8 @@ export const GAMES = [
     description: 'Pop the balloon that shows the correct answer!',
     ageMin: 5,
     component: 'NumberBalloons',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'math-compare',
@@ -80,6 +99,8 @@ export const GAMES = [
     description: 'Decide which number is bigger or smaller!',
     ageMin: 5,
     component: 'CompareNumbers',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'math-missing',
@@ -89,6 +110,8 @@ export const GAMES = [
     description: 'Find the number that is missing from the sequence!',
     ageMin: 6,
     component: 'MissingNumber',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'math-shapes',
@@ -98,6 +121,8 @@ export const GAMES = [
     description: 'Count the shapes on the screen and answer correctly!',
     ageMin: 4,
     component: 'ShapeCount',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'math-even-odd',
@@ -107,6 +132,8 @@ export const GAMES = [
     description: 'Sort numbers into Even and Odd buckets!',
     ageMin: 6,
     component: 'EvenOdd',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'math-fractions',
@@ -116,6 +143,8 @@ export const GAMES = [
     description: 'Pick the pizza slice that shows the right fraction!',
     ageMin: 8,
     component: 'FractionFinder',
+    difficulty: 'hard',
+    isPremium: true,
   },
   {
     id: 'math-clock',
@@ -125,6 +154,8 @@ export const GAMES = [
     description: 'Read the clock and type the correct time!',
     ageMin: 7,
     component: 'TellTime',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'math-division',
@@ -134,6 +165,8 @@ export const GAMES = [
     description: 'Solve division problems in a speedy dash!',
     ageMin: 8,
     component: 'DivisionDash',
+    difficulty: 'hard',
+    isPremium: true,
   },
 
   /* ── LETTERS ────────────────────────────────────────────── */
@@ -145,6 +178,8 @@ export const GAMES = [
     description: 'Arrange the letters in the correct alphabetical order!',
     ageMin: 4,
     component: 'AbcOrder',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'letters-word-match',
@@ -154,6 +189,8 @@ export const GAMES = [
     description: 'Match the picture card to the correct word!',
     ageMin: 5,
     component: 'WordMatch',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'letters-spell-it',
@@ -163,6 +200,8 @@ export const GAMES = [
     description: 'Spell the word shown in the picture!',
     ageMin: 6,
     component: 'SpellIt',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'letters-missing-letter',
@@ -172,6 +211,8 @@ export const GAMES = [
     description: 'Fill in the missing letter to complete the word!',
     ageMin: 5,
     component: 'MissingLetter',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'letters-uppercase',
@@ -181,6 +222,8 @@ export const GAMES = [
     description: 'Match uppercase letters to their lowercase twins!',
     ageMin: 4,
     component: 'UpperLower',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'letters-rhyme',
@@ -190,6 +233,8 @@ export const GAMES = [
     description: 'Pick the word that rhymes with the given word!',
     ageMin: 5,
     component: 'RhymeTime',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'letters-vowels',
@@ -199,6 +244,8 @@ export const GAMES = [
     description: 'Find and pop all the vowels in the word!',
     ageMin: 5,
     component: 'VowelHunt',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'letters-word-scramble',
@@ -208,6 +255,8 @@ export const GAMES = [
     description: 'Unscramble the jumbled letters to form a word!',
     ageMin: 7,
     component: 'WordScramble',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'letters-first-sound',
@@ -217,6 +266,8 @@ export const GAMES = [
     description: 'Pick the letter that a word starts with!',
     ageMin: 4,
     component: 'FirstSound',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'letters-hangman',
@@ -226,6 +277,8 @@ export const GAMES = [
     description: 'Guess the hidden word letter by letter!',
     ageMin: 7,
     component: 'WordBuilder',
+    difficulty: 'hard',
+    isPremium: true,
   },
   {
     id: 'letters-sentence',
@@ -235,6 +288,8 @@ export const GAMES = [
     description: 'Arrange the words to form a correct sentence!',
     ageMin: 8,
     component: 'SentenceBuilder',
+    difficulty: 'hard',
+    isPremium: true,
   },
 
   /* ── LOGIC / GEOGRAPHY ──────────────────────────────────── */
@@ -246,6 +301,8 @@ export const GAMES = [
     description: 'Identify the country from its flag!',
     ageMin: 7,
     component: 'FlagQuiz',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'logic-capitals',
@@ -255,6 +312,8 @@ export const GAMES = [
     description: 'Match countries to their capital cities!',
     ageMin: 8,
     component: 'WorldCapitals',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'logic-continents',
@@ -264,6 +323,8 @@ export const GAMES = [
     description: 'Sort countries into the correct continents!',
     ageMin: 7,
     component: 'ContinentSort',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'logic-pattern',
@@ -273,6 +334,8 @@ export const GAMES = [
     description: 'Find and complete the visual pattern!',
     ageMin: 5,
     component: 'PatternMaster',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'logic-memory',
@@ -282,6 +345,8 @@ export const GAMES = [
     description: 'Flip cards and find matching pairs!',
     ageMin: 4,
     component: 'MemoryMatch',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'logic-maze',
@@ -291,6 +356,8 @@ export const GAMES = [
     description: 'Navigate through the maze to reach the exit!',
     ageMin: 5,
     component: 'MazeRunner',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'logic-sort-colors',
@@ -300,6 +367,8 @@ export const GAMES = [
     description: 'Sort the coloured items into the right groups!',
     ageMin: 4,
     component: 'ColorSort',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'logic-sequences',
@@ -309,6 +378,8 @@ export const GAMES = [
     description: 'Look at the sequence and predict the next item!',
     ageMin: 6,
     component: 'WhatComesNext',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'logic-true-false',
@@ -318,6 +389,8 @@ export const GAMES = [
     description: 'Read the fact and decide if it is true or false!',
     ageMin: 6,
     component: 'TrueFalse',
+    difficulty: 'easy',
+    isPremium: false,
   },
   {
     id: 'logic-odd-one-out',
@@ -327,6 +400,8 @@ export const GAMES = [
     description: 'Find the item that does not belong in the group!',
     ageMin: 5,
     component: 'OddOneOut',
+    difficulty: 'medium',
+    isPremium: false,
   },
   {
     id: 'logic-country-match',
@@ -336,6 +411,8 @@ export const GAMES = [
     description: 'Match famous landmarks to their countries!',
     ageMin: 8,
     component: 'CountryMatch',
+    difficulty: 'hard',
+    isPremium: true,
   },
   {
     id: 'logic-rivers',
@@ -345,5 +422,7 @@ export const GAMES = [
     description: 'Match the world\'s great rivers to the right country!',
     ageMin: 9,
     component: 'RiverCountry',
+    difficulty: 'hard',
+    isPremium: true,
   },
 ];

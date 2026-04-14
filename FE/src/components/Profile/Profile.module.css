@@ -1,0 +1,276 @@
+.page {
+  flex: 1;
+  background: linear-gradient(135deg, #fff3ef 0%, #f0f9ff 100%);
+  padding: 2.5rem 1.5rem 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ── Avatar ──────────────────────────────────────────────*/
+.avatarWrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.avatar {
+  font-size: 5rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+.roleBadge {
+  display: inline-block;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.2rem 0.75rem;
+  border-radius: 50px;
+  letter-spacing: 0.4px;
+}
+
+/* ── Name / email ─────────────────────────────────────── */
+.name {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.email {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: -0.4rem 0 0;
+}
+
+/* ── Subscription badge ───────────────────────────────── */
+.subBadge {
+  display: inline-block;
+  border: 2px solid;
+  border-radius: 50px;
+  padding: 0.3rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+/* ── Stats ────────────────────────────────────────────── */
+.stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding: 1.2rem;
+  background: #f9fafb;
+  border-radius: var(--radius-md);
+  width: 100%;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.statNum {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--primary-color);
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.savedMsg {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--success);
+  margin: -0.4rem 0;
+}
+
+/* ── Edit section ─────────────────────────────────────── */
+.editSection {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.editLabel {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.editInput {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-family: var(--font-family);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.editInput:focus { border-color: var(--primary-color); }
+
+.avatarGrid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.4rem;
+}
+
+.avatarOption {
+  font-size: 1.6rem;
+  background: #f4f4f4;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 0.2rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+
+.avatarOption:hover { background: #ffe66d; }
+
+.avatarSelected {
+  border-color: var(--primary-color);
+  background: #fff3ef;
+}
+
+.editActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.saveBtn {
+  flex: 1;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 0.65rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.2s;
+}
+
+.saveBtn:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-2px); }
+.saveBtn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+.cancelBtn {
+  flex: 1;
+  background: #f0f0f0;
+  color: var(--text-primary);
+  border: none;
+  border-radius: 50px;
+  padding: 0.65rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: background 0.2s;
+}
+
+.cancelBtn:hover { background: #e0e0e0; }
+
+/* ── Edit button ──────────────────────────────────────── */
+.editBtn {
+  background: none;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 50px;
+  padding: 0.55rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.2s;
+}
+
+.editBtn:hover { background: #fff3ef; }
+
+/* ── Premium upsell ───────────────────────────────────── */
+.upsell {
+  width: 100%;
+  background: linear-gradient(135deg, #ffe66d 0%, #ffb347 100%);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.upsell h3 {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #2c3e50;
+  margin-bottom: 0.75rem;
+}
+
+.upsellList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.upsellList li {
+  font-size: 0.9rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.upgradeBtn {
+  width: 100%;
+  background: #2c3e50;
+  color: #ffe66d;
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.2s;
+}
+
+.upgradeBtn:hover { background: #1a252f; transform: translateY(-2px); }
+
+/* ── Logout ───────────────────────────────────────────── */
+.logoutBtn {
+  background: none;
+  border: 2px solid #e0e0e0;
+  color: var(--text-secondary);
+  border-radius: 50px;
+  padding: 0.55rem 1.8rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.2s;
+}
+
+.logoutBtn:hover { border-color: var(--danger); color: var(--danger); }

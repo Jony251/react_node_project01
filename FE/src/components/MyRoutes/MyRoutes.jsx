@@ -5,6 +5,7 @@ import Footer from '../Footer/Footer';
 import Home from '../Home/Home';
 import GameHub from '../GameHub/GameHub';
 import GameShell from '../GameShell/GameShell';
+import Profile from '../Profile/Profile';
 import Contact from '../Contact/Contact';
 import GameManagement from '../GameManagement/GameManagement';
 import Login from '../LogIn_Reg/Login';
@@ -31,6 +32,11 @@ function MyRoutes() {
         <Route path="/play/:id" element={
           <ProtectedRoute>
             <GameShell />
+          </ProtectedRoute>
+        } />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         } />
         <Route path="/contact" element={

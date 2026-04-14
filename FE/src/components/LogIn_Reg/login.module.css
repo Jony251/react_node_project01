@@ -13,28 +13,81 @@
   box-shadow: 0 20px 60px rgba(0,0,0,0.18);
   padding: 2.5rem 2.5rem 2rem;
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
   text-align: center;
 }
 
-.logo {
-  font-size: 2.5rem;
-  margin-bottom: 0.25rem;
-}
+.logo { font-size: 2.5rem; margin-bottom: 0.2rem; }
 
 .title {
   font-size: 1.9rem;
   font-weight: 900;
   color: var(--primary-color);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 
 .subtitle {
   font-size: 0.95rem;
   color: var(--text-secondary);
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.4rem;
 }
 
+/* ── Google button wrapper ─────────────────────────────── */
+.googleWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* ── Divider ──────────────────────────────────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: #bbb;
+  font-size: 0.85rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+/* ── Role selector ────────────────────────────────────── */
+.roleRow {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.roleBtn {
+  flex: 1;
+  padding: 0.6rem 0.5rem;
+  border-radius: var(--radius-md);
+  border: 2px solid #e0e0e0;
+  background: #fafafa;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-family);
+}
+
+.roleBtn:hover { border-color: var(--primary-color); color: var(--primary-color); }
+
+.roleActive {
+  border-color: var(--primary-color);
+  background: #fff3ef;
+  color: var(--primary-color);
+}
+
+/* ── Form ─────────────────────────────────────────────── */
 .form {
   display: flex;
   flex-direction: column;
@@ -43,7 +96,7 @@
 }
 
 .submitButton {
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
   width: 100%;
   padding: 0.85rem;
   font-size: 1.05rem;
@@ -62,18 +115,14 @@
   transform: translateY(-2px);
 }
 
-.submitButton:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
+.submitButton:disabled { opacity: 0.7; cursor: not-allowed; }
 
 .togglePrompt {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 0.5rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
 }
 
@@ -83,11 +132,9 @@
   color: var(--primary-color);
   font-weight: 800;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-family: var(--font-family);
   padding: 0;
 }
 
-.toggleLink:hover {
-  text-decoration: underline;
-}
+.toggleLink:hover { text-decoration: underline; }

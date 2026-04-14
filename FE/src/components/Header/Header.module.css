@@ -82,6 +82,33 @@
   border-color: #ffffff;
 }
 
+.profileBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.25);
+  border: 2px solid rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.profileBtn:hover, .profileBtn.active {
+  background: rgba(255,255,255,0.45);
+}
+
+.avatarMini { font-size: 1.4rem; line-height: 1; }
+
+.crownMini {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
 .logoutBtn {
   display: inline-flex;
   align-items: center;

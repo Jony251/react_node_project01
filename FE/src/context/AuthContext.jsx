@@ -1,117 +1,130 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import api from '../services/apiClient';
 
 const AuthContext = createContext(null);
 
-/**
- * The AuthProvider component wraps the App component and provides the auth context to its children
- * It checks if the user is already logged in when the page loads and sets the appropriate state
- * It also provides the login and logout functions to change the state
- * @param {ReactNode} children The children components that will receive the auth context
- * @returns {ReactElement} The AuthProvider component
- */
+/* ── ROLE constants (must match BE) ──────────────────────*/
+export const ROLES = { CHILD: 0, ADMIN: 1, PARENT: 2 };
+
 export const AuthProvider = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [user, setUser] = useState(null);
-    const [isAdmin, setIsAdmin] = useState(false);
+  const [user, setUser]                 = useState(null);
+  const [isAuthenticated, setIsAuth]    = useState(false);
+  const [isLoading, setIsLoading]       = useState(true);
 
-    useEffect(() => {
-        // Check if user is logged in on page load
-        const token = localStorage.getItem('token');
-        if (token) {
-            // Set up axios interceptor for adding token to requests
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            
-            try {
-                const userData = JSON.parse(localStorage.getItem('user'));
-                setIsAuthenticated(true);
-                setUser(userData);
-                setIsAdmin(userData.role === 1);
-            } catch (error) {
-                console.error('Error parsing user data:', error);
-                handleLogout();
-            }
-        }
-    }, []);
+  const isAdmin  = user?.role === ROLES.ADMIN;
+  const isParent = user?.role === ROLES.PARENT;
+  const isChild  = user?.role === ROLES.CHILD;
+  const isPremium = user?.subscription === 'premium';
 
-    /**
-     * Logs in the user
-     * @param {string} email The email of the user
-     * @param {string} password The password of the user
-     * @returns {Object} An object with a success property and a message property if the login fails
-     */
-    const handleLogin = async (email, password) => {
-        try {
-            const response = await axios.post('/api/user/login', {
-                email,
-                password
-            });
+  /* ── hydrate from localStorage on mount ───────────────*/
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      api.get('/api/auth/me')
+        .then(r => {
+          setUser(r.data.user);
+          setIsAuth(true);
+        })
+        .catch(() => _clearStorage())
+        .finally(() => setIsLoading(false));
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
 
-            const { token, user } = response.data;
-            
-            // Store token and user data
-            localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(user));
-            
-            // Set up axios interceptor
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  /* ── listen for forced logout from interceptor ────────*/
+  useEffect(() => {
+    const handler = () => { setUser(null); setIsAuth(false); };
+    window.addEventListener('auth:logout', handler);
+    return () => window.removeEventListener('auth:logout', handler);
+  }, []);
 
-            setIsAuthenticated(true);
-            setUser(user);
-            setIsAdmin(user.role === 1);
+  function _persist(data) {
+    localStorage.setItem('accessToken',  data.accessToken);
+    localStorage.setItem('refreshToken', data.refreshToken);
+    localStorage.setItem('user',         JSON.stringify(data.user));
+    setUser(data.user);
+    setIsAuth(true);
+  }
 
-            return { success: true };
-        } catch (error) {
-            console.error('Login error:', error);
-            return {
-                success: false,
-                message: error.response?.data?.error || 'Login failed'
-            };
-        }
-    };
+  function _clearStorage() {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('user');
+  }
 
-    /**
-     * Logs out the user
-     * Removes the token and user data from local storage and sets the appropriate state
-     */
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        delete axios.defaults.headers.common['Authorization'];
-        setIsAuthenticated(false);
-        setUser(null);
-        setIsAdmin(false);
-    };
+  /* ── register ──────────────────────────────────────────*/
+  const register = useCallback(async (username, email, password, role = 'child') => {
+    const r = await api.post('/api/auth/register', { username, email, password, role });
+    _persist(r.data);
+    return { success: true };
+  }, []);
 
-    return (
-        <AuthContext.Provider value={{
-            isAuthenticated,
-            user,
-            isAdmin,
-            login: handleLogin,
-            logout: handleLogout
-        }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  /* ── login ─────────────────────────────────────────────*/
+  const login = useCallback(async (email, password) => {
+    try {
+      const r = await api.post('/api/auth/login', { email, password });
+      _persist(r.data);
+      return { success: true };
+    } catch (e) {
+      return { success: false, message: e.response?.data?.error || 'Login failed' };
+    }
+  }, []);
+
+  /* ── Google login ──────────────────────────────────────*/
+  const googleLogin = useCallback(async (credential) => {
+    try {
+      const r = await api.post('/api/auth/google', { credential });
+      _persist(r.data);
+      return { success: true };
+    } catch (e) {
+      return { success: false, message: e.response?.data?.error || 'Google login failed' };
+    }
+  }, []);
+
+  /* ── logout ────────────────────────────────────────────*/
+  const logout = useCallback(async () => {
+    try { await api.post('/api/auth/logout'); } catch {}
+    _clearStorage();
+    setUser(null);
+    setIsAuth(false);
+  }, []);
+
+  /* ── update profile ────────────────────────────────────*/
+  const updateProfile = useCallback(async (fields) => {
+    const r = await api.put('/api/auth/profile', fields);
+    const updated = r.data.user;
+    setUser(updated);
+    localStorage.setItem('user', JSON.stringify(updated));
+    return updated;
+  }, []);
+
+  /* ── save score ────────────────────────────────────────*/
+  const saveScore = useCallback(async (gameId, score, difficulty = 'easy') => {
+    if (!isAuthenticated) return;
+    try {
+      await api.post('/api/auth/score', { gameId, score, difficulty });
+      setUser(u => u ? { ...u, total_score: (u.total_score || 0) + score, games_played: (u.games_played || 0) + 1 } : u);
+    } catch {}
+  }, [isAuthenticated]);
+
+  return (
+    <AuthContext.Provider value={{
+      user, isAuthenticated, isLoading,
+      isAdmin, isParent, isChild, isPremium,
+      ROLES,
+      login, register, googleLogin, logout,
+      updateProfile, saveScore,
+    }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-/**
- * A hook that returns the user authentication state and functions to manage it.
- * This hook must be used within an AuthProvider.
- * @returns {Object} An object with the following properties:
- *   - isAuthenticated: A boolean indicating whether the user is authenticated or not
- *   - user: The user data if the user is authenticated, null otherwise
- *   - isAdmin: A boolean indicating whether the user is an admin or not
- *   - login: A function to log in the user
- *   - logout: A function to log out the user
- */
 export const useAuth = () => {
-    const context = useContext(AuthContext);
-    if (!context) {
-        throw new Error('useAuth must be used within an AuthProvider');
-    }
-    return context;
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider');
+  return ctx;
 };
 
 export default AuthContext;

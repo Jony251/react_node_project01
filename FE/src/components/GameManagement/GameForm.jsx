@@ -17,10 +17,6 @@ const GameForm = ({ mode, gameData, loading, onSubmit, onChange, onImageChange, 
     const fileInputRef = useRef(null);
     const [selectedFileName, setSelectedFileName] = useState('');
 
-    const handleFileButtonClick = () => {
-        fileInputRef.current.click();
-    };
-
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
