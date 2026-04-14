@@ -1,0 +1,10 @@
+services:
+  api:
+    build:
+      context: ./BE
+      dockerfile: Dockerfile
+    env_file:
+      - ./BE/.env
+    ports:
+      - "8081:8081"
+    restart: unless-stopped

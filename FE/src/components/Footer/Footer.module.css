@@ -1,18 +1,18 @@
 .footer {
     width: 100%;
-    background-color: var(--bg-secondary);
-    padding: 8px 0;
+    background: #0f172a;
+    padding: 10px 0;
     text-align: center;
-    height: 30px;
+    min-height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 -2px 5px var(--overlay-dark);
+    box-shadow: 0 -2px 8px rgba(15, 23, 42, 0.25);
     flex-shrink: 0;
 }
 
 .copyright {
     margin: 0;
     font-size: 14px;
-    color: var(--text-secondary);
+    color: #e2e8f0;
 }

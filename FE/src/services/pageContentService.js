@@ -4,7 +4,9 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/page-content';
+const API_URL = process.env.REACT_APP_API_BASE_URL
+    ? `${process.env.REACT_APP_API_BASE_URL}/api/page-content`
+    : '/api/page-content';
 
 /**
  * Retrieves page content from the API for the specified section

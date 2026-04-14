@@ -1,8 +1,5 @@
 const cors = require('cors');
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const db = require('./database/dbSingleton');
 const gamesRoutes = require('./routes/games');
 const userRoutes = require('./routes/user');
 const pageContentRouter = require('./routes/pageContent');
@@ -13,12 +10,18 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const corsOrigins = process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(',').map((origin) => origin.trim())
+    : ['http://localhost:3000'];
+
 // CORS configuration
-app.use(cors({
-    origin: 'http://localhost:3000', // Frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
-}));
+app.use(
+    cors({
+        origin: corsOrigins,
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true,
+    })
+);
 
 // Routes
 app.use('/api/games', gamesRoutes);
@@ -38,5 +41,5 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-const PORT = 8081;
+const PORT = Number(process.env.PORT) || 8081;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

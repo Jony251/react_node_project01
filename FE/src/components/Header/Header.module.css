@@ -1,11 +1,11 @@
 .header {
-    background-color: var(--bg-primary);
-    box-shadow: 0 2px 8px var(--overlay-dark);
-    padding: 1rem 0;
+    background: linear-gradient(90deg, #ffffff, #eff6ff 40%, #eef2ff);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+    padding: 0.9rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #dbeafe;
 }
 
 .container {
@@ -17,26 +17,39 @@
     justify-content: space-between;
 }
 
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
 .logo {
     display: flex;
     align-items: center;
 }
 
 .logo img {
-    height: 50px;
+    height: 46px;
     width: auto;
-    border-radius: 8px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
 }
 
 .projectName {
-    margin: 0 1rem;
+    margin: 0;
 }
 
 .projectName h1 {
-    font-size: 1.5rem;
-    color: var(--text-dark);
+    font-size: 1.35rem;
+    color: #0f172a;
     margin: 0;
-    font-weight: 600;
+    font-weight: 700;
+}
+
+.projectName p {
+    margin: 0.1rem 0 0;
+    font-size: 0.82rem;
+    color: #475569;
 }
 
 .nav {
@@ -48,6 +61,11 @@
 @media (max-width: 1024px) {
     .container {
         flex-wrap: wrap;
+    }
+
+    .brand {
+        width: 100%;
+        justify-content: center;
     }
     
     .nav {
@@ -61,10 +79,14 @@
 
 @media (max-width: 640px) {
     .projectName h1 {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
+    }
+
+    .projectName p {
+        font-size: 0.74rem;
     }
     
     .logo img {
-        height: 40px;
+        height: 38px;
     }
 }

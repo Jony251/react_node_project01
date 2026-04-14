@@ -1,8 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './Header.module.css';
-import { useAuth } from '../../context/AuthContext';
-import NavButton from '../common/NavButton/NavButton';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./Header.module.css";
+import { useAuth } from "../../context/AuthContext";
+import NavButton from "../common/NavButton/NavButton";
 
 const logo = process.env.PUBLIC_URL + '/logo.jpg';
 
@@ -24,15 +24,16 @@ function Header() {
     return (
         <header className={styles.header}>
             <div className={styles.container}>
-                
-                <div className={styles.logo}>
-                    <img src={logo} alt="Logo" />
+                <div className={styles.brand}>
+                    <div className={styles.logo}>
+                        <img src={logo} alt="Learning Arcade logo" />
+                    </div>
+                    <div className={styles.projectName}>
+                        <h1>Learning Arcade</h1>
+                        <p>Playful lessons in Math, ABC, and Geography</p>
+                    </div>
                 </div>
-                
-                <div className={styles.projectName}>
-                    <h1>Interactive Platform</h1>
-                </div>
-                
+
                 <nav className={styles.nav}>
                     <NavButton to="/" end>
                         Home
@@ -40,11 +41,11 @@ function Header() {
                     
 
                     <NavButton to="/games">
-                        Games
+                        Game Library
                     </NavButton>
                     
                     <NavButton to="/contact">
-                        Contact
+                        Support
                     </NavButton>
 
                     {isAdmin && (

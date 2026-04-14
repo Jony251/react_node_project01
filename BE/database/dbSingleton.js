@@ -2,6 +2,8 @@ const mysql = require('mysql2');
 
 let connection; // Variable for storing a single connection
 
+const isSslEnabled = process.env.DB_SSL === 'true';
+
 const dbSingleton = {
 /**
  * Establishes and returns a singleton MySQL database connection.
@@ -13,13 +15,22 @@ const dbSingleton = {
  */
     getConnection: () => {
         if (!connection) {
+            const connectionConfig = {
+                host: process.env.DB_HOST || 'localhost',
+                port: Number(process.env.DB_PORT) || 3306,
+                user: process.env.DB_USER || 'root',
+                password: process.env.DB_PASSWORD || '',
+                database: process.env.DB_NAME || 'gamedatabase',
+            };
+
+            if (isSslEnabled) {
+                connectionConfig.ssl = {
+                    rejectUnauthorized: process.env.DB_SSL_REJECT_UNAUTHORIZED !== 'false',
+                };
+            }
+
             // Create a connection only once
-            connection = mysql.createConnection({
-                host: 'localhost',
-                user: 'root',
-                password: '',
-                database: 'gamedatabase',
-            });
+            connection = mysql.createConnection(connectionConfig);
 
             connection.connect((err) => {
                 if (err) {
