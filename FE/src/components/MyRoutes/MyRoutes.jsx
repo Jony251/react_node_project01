@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import { Route, Routes } from 'react-router-dom';
-import MainPage from '../MainPage/MainPage';
 import Home from '../Home/Home';
+import GameHub from '../GameHub/GameHub';
+import GameShell from '../GameShell/GameShell';
 import Contact from '../Contact/Contact';
-import SingleGame from '../SingleGame/SingleGame';
 import GameManagement from '../GameManagement/GameManagement';
 import Login from '../LogIn_Reg/Login';
 import ProtectedRoute from '../common/ProtectedRoute/ProtectedRoute';
@@ -16,7 +16,7 @@ function MyRoutes() {
 
   return (
     <>
-      {isAuthenticated && <Header/>}
+      {isAuthenticated && <Header />}
       <Routes>
         <Route path="/" element={
           <ProtectedRoute>
@@ -25,22 +25,22 @@ function MyRoutes() {
         } />
         <Route path="/games" element={
           <ProtectedRoute>
-            <MainPage />
+            <GameHub />
+          </ProtectedRoute>
+        } />
+        <Route path="/play/:id" element={
+          <ProtectedRoute>
+            <GameShell />
           </ProtectedRoute>
         } />
         <Route path="/contact" element={
           <ProtectedRoute>
-            <Contact/>
+            <Contact />
           </ProtectedRoute>
         } />
         <Route path="/manage-games" element={
           <ProtectedRoute requireAdmin={true}>
-            <GameManagement/>
-          </ProtectedRoute>
-        } />
-        <Route path='/game/:id' element={
-          <ProtectedRoute>
-            <SingleGame />
+            <GameManagement />
           </ProtectedRoute>
         } />
         <Route path="/login" element={
@@ -49,7 +49,7 @@ function MyRoutes() {
           </ProtectedRoute>
         } />
       </Routes>
-      {isAuthenticated && <Footer/>}
+      {isAuthenticated && <Footer />}
     </>
   );
 }

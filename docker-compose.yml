@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: ./BE
+      dockerfile: Dockerfile
+    container_name: funzone-api
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      NODE_ENV: production
+      PORT: 8081
+      DB_HOST: ${DB_HOST:-db}
+      DB_PORT: ${DB_PORT:-3306}
+      DB_USER: ${DB_USER:-root}
+      DB_PASSWORD: ${DB_PASSWORD:-}
+      DB_NAME: ${DB_NAME:-gamedatabase}
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - funzone-net
+
+  db:
+    image: mysql:8.0
+    container_name: funzone-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-rootpass}
+      MYSQL_DATABASE: ${DB_NAME:-gamedatabase}
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./DB/gamedatabase.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - funzone-net
+
+volumes:
+  db-data:
+
+networks:
+  funzone-net:
+    driver: bridge
