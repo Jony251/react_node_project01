@@ -1,67 +1,79 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 import { useAuth } from '../../context/AuthContext';
-import NavButton from '../common/NavButton/NavButton';
-
-const logo = process.env.PUBLIC_URL + '/logo.jpg';
-
-/**
- * The Header component renders the main header of the application with the logo and main navigation
- *
- * @returns {React.ReactElement} The header component
- */
 
 function Header() {
-    const { logout, isAdmin } = useAuth();
-    const navigate = useNavigate();
+  const { logout, isAdmin } = useAuth();
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    const handleLogout = () => {
-        logout();
-        navigate('/login');
-    };
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
-    return (
-        <header className={styles.header}>
-            <div className={styles.container}>
-                
-                <div className={styles.logo}>
-                    <img src={logo} alt="Logo" />
-                </div>
-                
-                <div className={styles.projectName}>
-                    <h1>Interactive Platform</h1>
-                </div>
-                
-                <nav className={styles.nav}>
-                    <NavButton to="/" end>
-                        Home
-                    </NavButton>
-                    
+  const closeMenu = () => setMenuOpen(false);
 
-                    <NavButton to="/games">
-                        Games
-                    </NavButton>
-                    
-                    <NavButton to="/contact">
-                        Contact
-                    </NavButton>
+  return (
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <NavLink to="/" className={styles.logoArea} onClick={closeMenu}>
+          <span className={styles.logoEmoji}>🎮</span>
+          <span className={styles.logoText}>Fun<span>Zone</span></span>
+        </NavLink>
 
-                    {isAdmin && (
-                        <>
-                            <NavButton to="/manage-games">
-                                Manage Games
-                            </NavButton>
-                        </>
-                    )}
-                    
-                    <NavButton onClick={handleLogout}>
-                        Logout
-                    </NavButton>
-                </nav>
-            </div>
-        </header>
-    );
+        <button
+          className={styles.hamburger}
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </button>
+
+        <nav className={`${styles.nav} ${menuOpen ? styles.open : ''}`}>
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}
+            onClick={closeMenu}
+          >
+            🏠 Home
+          </NavLink>
+
+          <NavLink
+            to="/games"
+            className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}
+            onClick={closeMenu}
+          >
+            🎯 Games
+          </NavLink>
+
+          <NavLink
+            to="/contact"
+            className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}
+            onClick={closeMenu}
+          >
+            ✉️ Contact
+          </NavLink>
+
+          {isAdmin && (
+            <NavLink
+              to="/manage-games"
+              className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}
+              onClick={closeMenu}
+            >
+              ⚙️ Manage
+            </NavLink>
+          )}
+
+          <button className={styles.logoutBtn} onClick={handleLogout}>
+            👋 Logout
+          </button>
+        </nav>
+      </div>
+    </header>
+  );
 }
 
 export default Header;

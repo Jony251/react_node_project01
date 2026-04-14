@@ -178,7 +178,9 @@ function Login() {
     return (
         <div className={styles.loginContainer}>
             <div className={styles.loginBox}>
-                <h1 className={styles.title}>{isLoginMode ? 'Login' : 'Sign Up'}</h1>
+                <div className={styles.logo}>🎮</div>
+                <h1 className={styles.title}>{isLoginMode ? 'Welcome Back!' : 'Join FunZone!'}</h1>
+                <p className={styles.subtitle}>{isLoginMode ? 'Log in to start playing!' : 'Create your account to play!'}</p>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     {!isLoginMode && (
                         <CustomInput

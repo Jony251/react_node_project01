@@ -1,0 +1,198 @@
+.page {
+  flex: 1;
+}
+
+/* ── Hero ─────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff9f43 55%, #ffe66d 100%);
+  padding: 4rem 1.5rem;
+  clip-path: ellipse(110% 100% at 50% 0%);
+  margin-bottom: 1rem;
+}
+
+.heroInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.heroText {
+  flex: 1 1 320px;
+}
+
+.heroTitle {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 3px 3px 0 rgba(0,0,0,0.12);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.heroTitle span {
+  color: #2c3e50;
+}
+
+.heroSub {
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.93);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 460px;
+}
+
+.heroCta {
+  display: inline-block;
+  background: #ffffff;
+  color: var(--primary-color);
+  font-weight: 900;
+  font-size: 1.2rem;
+  padding: 0.85rem 2.2rem;
+  border-radius: 50px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.heroCta:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+}
+
+.heroIllustration {
+  flex: 0 1 280px;
+  position: relative;
+  height: 180px;
+}
+
+.floatEmoji {
+  position: absolute;
+  animation: float 3.5s ease-in-out infinite;
+  user-select: none;
+}
+
+.floatEmoji:nth-child(1) { top: 0;    left: 20px; }
+.floatEmoji:nth-child(2) { top: 60px; left: 120px; }
+.floatEmoji:nth-child(3) { top: 10px; left: 200px; }
+.floatEmoji:nth-child(4) { top: 90px; left: 40px; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+/* ── Category cards ───────────────────────────────────── */
+.categories {
+  max-width: 1100px;
+  margin: 0 auto 3.5rem;
+  padding: 0 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.catGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.catCard {
+  background: var(--cat-bg);
+  border: 3px solid var(--cat-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.catCard:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+}
+
+.catEmoji {
+  font-size: 3.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.catName {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--cat-color);
+  margin-bottom: 0.5rem;
+}
+
+.catDesc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+}
+
+.catArrow {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--cat-color);
+  background: transparent;
+  border: 2px solid var(--cat-color);
+  border-radius: 50px;
+  padding: 0.35rem 1.1rem;
+  transition: all 0.2s;
+}
+
+.catCard:hover .catArrow {
+  background: var(--cat-color);
+  color: #ffffff;
+}
+
+/* ── How it works ─────────────────────────────────────── */
+.howIt {
+  background: var(--bg-secondary);
+  padding: 3rem 1.5rem 4rem;
+}
+
+.steps {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.step {
+  text-align: center;
+}
+
+.stepIcon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.stepTitle {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.stepDesc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}

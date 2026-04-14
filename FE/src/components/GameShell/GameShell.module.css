@@ -1,0 +1,130 @@
+.shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  min-height: calc(100vh - 72px);
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  gap: 1rem;
+  color: #fff;
+}
+
+.backBtn {
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-decoration: none;
+  background: rgba(255,255,255,0.22);
+  padding: 0.3rem 0.9rem;
+  border-radius: 50px;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.backBtn:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+.gameInfo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.gameEmoji {
+  font-size: 1.5rem;
+}
+
+.gameTitle {
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
+}
+
+.scoreBox {
+  font-size: 1.1rem;
+  font-weight: 900;
+  background: rgba(255,255,255,0.25);
+  padding: 0.3rem 1rem;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+.gameArea {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.comingSoon {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.notFound {
+  text-align: center;
+  padding: 4rem 1.5rem;
+}
+
+.notFound h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.notFound a {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.bottomBar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem 2rem;
+}
+
+.restartBtn {
+  background: var(--cat-color, var(--primary-color));
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  border: none;
+  padding: 0.65rem 2rem;
+  border-radius: 50px;
+  transition: all 0.2s;
+  font-family: var(--font-family);
+}
+
+.restartBtn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.allGamesBtn {
+  background: #ffffff;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 800;
+  border: 2px solid var(--border-color);
+  padding: 0.65rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.allGamesBtn:hover {
+  border-color: var(--cat-color, var(--primary-color));
+  color: var(--cat-color, var(--primary-color));
+  transform: translateY(-2px);
+}

@@ -1,37 +1,63 @@
 :root {
-  /* Primary Colors */
-  --primary-color: #007bff;
-  --primary-dark: #0056b3;
-  --primary-light: #b3d7ff;
+  /* Brand palette – bright, child-friendly, ABCya-style */
+  --primary-color: #ff6b35;
+  --primary-dark:  #e55528;
+  --primary-light: #ffb399;
 
-  /* Secondary Colors */
-  --secondary-color: #6c757d;
-  --secondary-dark: #495057;
-  --secondary-light: #adb5bd;
+  --secondary-color: #4ecdc4;
+  --secondary-dark:  #38b2aa;
+  --secondary-light: #a8edea;
+
+  --accent-yellow: #ffe66d;
+  --accent-purple: #9b59b6;
+  --accent-green:  #2ecc71;
+  --accent-pink:   #ff6eb4;
+  --accent-blue:   #3498db;
+
+  /* Category colors */
+  --cat-math:    #ff6b35;
+  --cat-letters: #4ecdc4;
+  --cat-logic:   #9b59b6;
 
   /* Background Colors */
-  --bg-primary: #f4eaea;
-  --bg-secondary: #ece7ec;
-  --bg-dark: #343a40;
+  --bg-primary:   #fff9f0;
+  --bg-secondary: #f0f9ff;
+  --bg-dark:      #2c3e50;
+  --bg-card:      #ffffff;
 
   /* Text Colors */
-  --text-primary: #212529;
+  --text-primary:   #2c3e50;
   --text-secondary: #6c757d;
-  --text-light: #f8f9fa;
-  --text-dark: #343a40;
+  --text-light:     #f8f9fa;
+  --text-dark:      #1a1a2e;
+  --text-on-primary: #ffffff;
 
   /* Status Colors */
-  --success: #28a745;
-  --danger: #dc3545;
-  --warning: #ffc107;
-  --info: #17a2b8;
+  --success: #2ecc71;
+  --danger:  #e74c3c;
+  --warning: #f39c12;
+  --info:    #3498db;
 
   /* Border Colors */
-  --border-color: #dee2e6;
-  --border-dark: #343a40;
+  --border-color: #e0e0e0;
+  --border-dark:  #2c3e50;
   --border-light: #f8f9fa;
 
   /* Overlay Colors */
-  --overlay-dark: rgba(0, 0, 0, 0.5);
-  --overlay-light: rgba(255, 255, 255, 0.5);
+  --overlay-dark:  rgba(0, 0, 0, 0.55);
+  --overlay-light: rgba(255, 255, 255, 0.7);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.10);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.14);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.18);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* Font */
+  --font-family: 'Nunito', 'Arial Rounded MT Bold', Arial, sans-serif;
 }
