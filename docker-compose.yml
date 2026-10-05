@@ -17,7 +17,7 @@ services:
       DB_USER: ${DB_USER:-root}
       DB_PASSWORD: ${DB_PASSWORD:-}
       DB_NAME: ${DB_NAME:-gamedatabase}
-      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env}
       FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
     depends_on:
       db:

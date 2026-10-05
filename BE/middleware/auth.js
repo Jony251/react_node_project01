@@ -1,7 +1,10 @@
 const jwt = require('jsonwebtoken');
 
-// Using a hardcoded secret key for study purposes
-const JWT_SECRET = 'evgeny-leonid-secret-key';
+// Signing secret comes from the environment; refuse to start without it.
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET environment variable is not set');
+}
 
 const verifyToken = (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
