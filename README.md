@@ -1,3 +1,10 @@
+> [!WARNING]
+> **Legacy, unmaintained project. Do not deploy.**
+>
+> This is a team student project built together with Leonid Shmiakin. It is no longer maintained and has known security vulnerabilities (for example, unauthenticated write endpoints in the API). It is kept for reference only and must not be deployed or exposed to the internet.
+>
+> The work continues as a new, independently written project: [Jony251/kubik](https://github.com/Jony251/kubik).
+
 <div align="center">
 
 # FunZone: educational games for kids
