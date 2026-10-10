@@ -91,26 +91,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `role`, `username`, `email`, `password`) VALUES
-(1, NULL, 'Alice Johnson', 'alice@example.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(2, NULL, 'Bob Smith', 'bob@example.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(3, NULL, 'Charlie Davis', 'charlie@example.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(4, NULL, 'David White', 'david@example.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(5, NULL, 'Eve Adams', 'eve@example.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(6, NULL, 'Frank Miller', 'frank@example.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(7, NULL, 'Grace Wilson', 'grace@example.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(8, NULL, 'Henry Brown', 'henry@example.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(9, NULL, 'Isabel Scott', 'isabel@example.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(10, NULL, 'Jack Lee', 'jack@example.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(11, NULL, 'Evgen', 'qwerty12@gmail.com', '$2b$10$eDnMWhlrkNg4jXIwN24vhuyVCO2NNaGFD4LWEElwrQ9sMaM.7M62W'),
-(12, 1, 'Evgeny', 'jony90@live.ru', '$2b$10$.s2QW/9GPvghd1COGJcziu07MIvehyIjA9/P84.tip7/NaadN1FYS'),
-(13, NULL, 'Ugeny', 'Exemple@gmial.com', '$2b$10$UTQvas/rEg2xg2MPREWBcuM.xCpqSqLWnF95asoLAhUDr97dQCmKW'),
-(14, 0, 'test', 'test@test.com', '$2b$10$nTZ76OQwjG8BQYgLMxGgm.izwMmSlVrFyE30vOvLmuuD62FkEadaC');
-
---
 -- Indexes for dumped tables
 --
 
